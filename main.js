@@ -173,13 +173,13 @@ const update = (unit) => {
   let dataToFit = q[0].map((x, i) =>[parseFloat(q[0][i].value),parseFloat(q[1][i].value)])
 
   let reg = regression.linear(dataToFit, {precision: 3})
-  console.log(reg)
+  // console.log(reg)
 
   const yValuesMl = yValues
     .map(x => (x*STEP_FREQ)+START_FREQ)
     .map(reg.predict)
     .map(x => x[1])
-  console.log(yValuesMl)
+  // console.log(yValuesMl)
     
   // const yValuesCm = dataArr
   //   .map(winArgmax)
@@ -256,10 +256,6 @@ if (localStorageBlInputData) {
   document.getElementById('input-data').value = localStorageBlInputData
 }
 
-update()
-
-
-
 function relMouseCoords(event){
 
   const rect = event.target.getBoundingClientRect()
@@ -276,3 +272,6 @@ function relMouseCoords(event){
 ['mousemove'].forEach(item => {
   document.getElementById('full-spectogram').addEventListener(item, (evt) => relMouseCoords(evt));
 })
+
+
+update()
