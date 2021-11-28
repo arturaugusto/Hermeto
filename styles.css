@@ -1,0 +1,62 @@
+html {
+  background: #242424;
+  color: white;
+  /*text-shadow: 0.5px 0.5px #fff;*/
+}
+
+body, .title, .subtitle, .u-label, .u-marker {
+  color: #fff8ea;
+}
+
+input, optgroup, select, .textarea, .input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  background-color: #f0f0f0;
+  background: #161414;
+  border: none;
+  border-radius: 0;
+  color: #cbc7c0;
+}
+
+
+/* scroll style */
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888888 #22272e;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #22272e;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #888888;
+  border-radius: 2px;
+  border: 2px solid #22272e;
+}
+
+.input-data {
+  white-space: nowrap !important;
+  overflow: auto !important;
+}
+
+#full-spectogram {
+  width: 200%;
+  height: 100%;
+  /*image-rendering: pixelated;*/
+  shape-rendering: crispedges;
+  cursor: crosshair;
+}
+
+.full-spectogram-canvas-container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 300px;
+}

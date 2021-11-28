@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hermeto</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="uPlot.min.css">
+    <script type="text/javascript" src="uPlot.iife.min.js"></script>
+    <script type="text/javascript" src="sweeper.js"></script>
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript" src="sampleData.js"></script>
+    <script type="text/javascript" src="regression.min.js"></script>
+
+
+  </head>
+  <body>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Hermeto
+      </h1>
+      <h2 class="subtitle has-text-white-ter is-6">Primeiro desafio de transformação digital do <span class="has-text-info">IPT</span></h2>
+    </div>
+  </section>
+
+  <div class="wrapper" style="background: #1f1f1f;">
+    <canvas class="visualizer"></canvas>
+  </div>
+
+  
+  <div class="columns is-centered box is-shadowless" style="background: #242424;">
+    <div class="column is-half">
+      
+      <div class="columns is-mobile" style="background: #1f1f1f;">
+        <div class="column is-size-12 has-text-primary">
+          Sweep interval
+        </div>
+        <div class="column is-size-12 has-text-primary">
+          Measurement
+        </div>
+      </div>
+
+
+      <div class="columns is-mobile" style="background: #1f1f1f;">
+        <div class="column is-size-12 has-text-primary">
+          <div class="field has-addons">
+            <p class="control">
+              <span class="select">
+                <select id="interval-select">
+                  <option>Once</option>
+                  <option>Interval (s):</option>
+                </select>
+              </span>
+            </p>
+
+            <p class="control">
+              <input id="interval-input" class="input" type="number" min="0" step="1" value="5" style="width: 80px;">
+            </p>
+
+          </div>
+        </div>
+        <div class="column is-size-12 has-text-primary">
+          <div class="field">
+            <label class="is-size-7 has-text-grey-light">Amplitude:</label>
+            <span class="control">
+              <span id="argmax" class="has-text-white">-</span>
+            </span>
+          </div>
+          <div class="field">
+            <label class="is-size-7 has-text-grey-light">Frequency:</label>
+            <span class="control">
+              <span class="has-text-white" id="sweep-range-label">-</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="columns is-mobile is-centered">
+        <div class="column is-size-12">
+          <p class="control">
+            <button class="button is-large is-link is-fullwidth" id="sweep-btn" disabled="">Click anywhere to enable audio</button>
+          </p>
+          <div class="has-text-white-ter is-size-7">Range: ~ <span id="minCm">-</span> cm - <span id="maxCm">-</span> cm</div>
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+
+
+
+
+  <section class="section">
+    <div class="container">
+      <textarea id="input-data" class="textarea watch" style="display: none;"></textarea>
+      <div style="">        
+        <div class="field is-grouped is-grouped-right mt-2">
+          <div class="control is-right">
+            <button class="button" id="load-sample-data-btn">Load sample data</button>
+          </div>
+        </div>
+      </div>
+
+      <span class="subtitle">
+        Spectogram:
+      </span>
+      <div class="full-spectogram-canvas-container">
+        <canvas id="full-spectogram"></canvas>
+      </div>
+      <p>Frequency under cursor: <span id="cursor-freq">-</span></p>
+        <div class="field is-grouped is-grouped-right mt-2">
+          <div class="control is-right">
+            <button class="button" id="remove-data-btn">Clear</button>
+          </div>
+        </div>
+
+    </div>
+  </section>
+
+  
+  <div class="control ml-6">
+    <p>Curve fit:</p>
+    <p class="control mt-1">
+      #1 <input class="input watch cf-hz" type="number" style="width: 100px;" value="683">Hz &rarr;
+         <input class="input watch cf-ml" type="number" style="width: 100px;" value="1.4"> ml
+    </p>
+    <p class="control mt-1">
+      #2 <input class="input watch cf-hz" type="number" style="width: 100px;" value="686.75">Hz &rarr;
+         <input class="input watch cf-ml" type="number" style="width: 100px;" value="1.15"> ml
+    </p>
+    <p class="control mt-1">
+      #3 <input class="input watch cf-hz" type="number" style="width: 100px;" value="693.85">Hz &rarr;
+         <input class="input watch cf-ml" type="number" style="width: 100px;" value="0.55"> ml
+    </p>
+    <p class="control mt-1">
+      #4 <input class="input watch cf-hz" type="number" style="width: 100px;" value="709.9">Hz &rarr;
+         <input class="input watch cf-ml" type="number" style="width: 100px;" value="0.15"> ml
+    </p>
+    <!-- <p class="control mt-1">
+      #5 <input class="input cf-hz" type="number" style="width: 100px;" value="736.25">Hz &rarr;
+         <input class="input cf-ml" type="number" style="width: 100px;" value="1.6"> ml
+    </p> -->
+  </div>
+
+
+
+
+
+  <div id="plot" style="background: #272727;margin: 20px;padding-top: 10px;"></div>
+
+
+  <div>
+    <a href="https://www.youtube.com/watch?v=06Qm-Z5OsHw&t=127s" target="_blank">&nbsp; Hermeto Flute</a>
+  </div>
+
+  </body>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="events.js"></script>
+  <script type="text/javascript" src="analyzer.js"></script>
+</html>
